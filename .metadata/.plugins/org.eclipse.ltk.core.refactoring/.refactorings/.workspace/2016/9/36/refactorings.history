@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;protobuf-sample&apos; to &apos;protobuf-example-domain&apos;" description="Rename resource &apos;protobuf-sample&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/protobuf-sample" name="protobuf-example-domain" stamp="1472823790221" updateReferences="true"/>
+</session>

@@ -1,0 +1,42 @@
+package com.example.domain.etl;
+
+import com.example.domain.model.AddressBookProtos.AddressBook;
+import com.example.domain.model.AddressBookProtos.Person;
+import com.example.domain.model.AddressBookProtos.Person.PhoneNumber;
+import com.google.protobuf.InvalidProtocolBufferException;
+
+import org.apache.commons.codec.binary.Base64;
+
+public class AddressBookBusiness 
+{
+		
+	static String GetAddressBookInfo(AddressBook addressBook) 
+	{
+		
+		String ab = "";
+		Person person = addressBook.getPerson(0);
+			
+		ab += person.getId();  
+		ab += "," + person.getName();
+		ab += "," + ((person.hasEmail()) ? person.getEmail() : "NULL");
+		ab += ",";
+				
+		if(person.getPhoneCount() > 0)
+		{
+			PhoneNumber phone = person.getPhone(0);
+			ab += ((phone.hasNumber()) ? phone.getNumber() : "");
+		}
+		else
+		{
+			ab += "NULL"; 
+		}
+		
+		return ab;
+	}
+	
+	public String ToAddressBook(String rawData) throws InvalidProtocolBufferException
+	{
+		return GetAddressBookInfo(AddressBook.parseFrom(Base64.decodeBase64(rawData)));
+	}
+
+}

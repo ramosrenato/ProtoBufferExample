@@ -1,0 +1,88 @@
+package com.example.test;
+
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+
+import org.apache.commons.codec.binary.Base64;
+
+import org.junit.Test;
+
+import com.example.model.AddressBookProtos.Person;
+
+
+
+
+public class PersonTest {
+
+
+	static Person CreatePerson() throws IOException 
+	{
+		Person.Builder person = Person.newBuilder();
+
+		person.setId(1);
+		person.setName("Fulano");
+		person.setEmail("fulano@email.com");
+		Person.PhoneNumber.Builder phoneNumber = Person.PhoneNumber.newBuilder().setNumber("5555-4433");
+		phoneNumber.setType(Person.PhoneType.WORK);	
+		person.addPhone(phoneNumber);
+
+		return person.build();
+	}
+	
+	
+	
+	@Test
+	public void test() throws IOException {
+		
+		String arg = "c:\\temp\\book.txt"; 
+
+	    AddressBook.Builder addressBook = AddressBook.newBuilder();
+
+	    // Add an address.
+	    addressBook.addPerson( CreatePerson() );
+    	
+	    // Write the new address book back to disk.
+	    FileOutputStream output = new FileOutputStream(arg,true);
+	    try 
+	    {
+	    	output.write(Base64.encodeBase64String(addressBook.build().toByteArray()).getBytes());
+	    	output.write(13);
+	    } 
+	    finally 
+	    {
+	    	output.close();
+	    }
+		
+	    
+	    // Read Address Book
+	    
+	    InputStream fis = new FileInputStream(arg);
+		BufferedReader br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
+		String line;
+		
+		while ((line = br.readLine()) != null) {}
+		
+		AddressBook addressBookRet = AddressBook.parseFrom(Base64.decodeBase64(line));
+		
+		for (Person person: addressBookRet.getPersonList()) {
+			
+			assertTrue( (person.getId() == 1) );
+			assertTrue( person.getName().equals("Fulano") );
+			assertTrue( person.hasEmail() ); 
+		}
+		
+		// Done with the file
+		fis.close();
+		br.close();
+		br = null;
+		fis = null;
+		
+	}
+
+}

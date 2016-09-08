@@ -1,0 +1,73 @@
+package com.example.test;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+
+import org.apache.commons.codec.binary.Base64;
+
+import com.example.domain.model.AddressBookProtos.AddressBook;
+import com.example.domain.model.AddressBookProtos.Person;
+
+public class ListPersonTest {
+
+	//Iterates though all people in the AddressBook and prints info about them.
+	static void Print(AddressBook addressBook) 
+	{
+		for (Person person: addressBook.getPersonList()) {
+			System.out.println("Person ID: " + person.getId());
+			System.out.println("  Name: " + person.getName());
+			
+			if (person.hasEmail()) {
+				System.out.println("  E-mail address: " + person.getEmail());
+			}
+
+			for (Person.PhoneNumber phoneNumber : person.getPhoneList()) {
+				switch (phoneNumber.getType()) {
+				case MOBILE:
+					System.out.print("  Mobile phone #: ");
+					break;
+				case HOME:
+					System.out.print("  Home phone #: ");
+					break;
+				case WORK:
+					System.out.print("  Work phone #: ");
+					break;
+				}
+				
+				System.out.println(phoneNumber.getNumber());
+			}
+		}
+	}
+	
+	
+	
+	public static void main(String[] args) throws FileNotFoundException, IOException 
+	{
+		String arg = "c:\\temp\\book.txt";
+		InputStream fis = new FileInputStream(arg);
+		BufferedReader br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
+		String line;
+		
+		while ((line = br.readLine()) != null) {
+			AddressBook addressBook = AddressBook.parseFrom(Base64.decodeBase64(line));
+		    Print(addressBook);
+		}
+
+		// Done with the file
+		fis.close();
+		br.close();
+		br = null;
+		fis = null;
+		
+	    // Read the existing address book.
+	    //AddressBook addressBook = AddressBook.parseFrom( new FileInputStream(arg));
+	    //Print(addressBook);
+
+	}
+
+}
