@@ -1,3 +1,5 @@
+# Maven
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -7,6 +9,8 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+# Eclipse Java
 
 *.class
 
@@ -60,3 +64,7 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+# Intellij Java
+.idea/
+*.iml
+*.iws
