@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0c3a670e-3a6b-45df-a888-d374f12e55d2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="0c3a670e-3a6b-45df-a888-d374f12e55d2" name="Default" comment="" />
     <ignored path="protobuf.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/protobuf-example-domain/target/" />
@@ -585,12 +581,12 @@
       <workItem from="1473288728802" duration="1699000" />
       <workItem from="1473295841461" duration="6616000" />
       <workItem from="1473348050416" duration="514000" />
-      <workItem from="1473349779805" duration="257000" />
+      <workItem from="1473349779805" duration="323000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9086000" />
+    <option name="totallyTimeSpent" value="9152000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
